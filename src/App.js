@@ -5,22 +5,21 @@ import { useState } from 'react';
 import { addInfo, updateInfo } from './utils/functions';
 import { ToastContainer } from 'react-toastify';
 
-const initialValue = { username: '', phoneNumber: '', gender: 'NO INFO' };
+const initialValues = { username: '', phoneNumber: '', gender: 'NO INFO' };
 
 function App() {
-  const [info, setInfo] = useState(initialValue);
+  const [info, setInfo] = useState(initialValues);
 
   const handleFormSubmit = () => {
-    if(info.id){
+    if (info.id) {
       updateInfo(info);
-    }else{
-      addInfo(info)
+    } else {
+      addInfo(info);
     }
-    
   };
 
-  const editHandler = (id, username, phoneNumber, gender) => {
-    setInfo({ id, username, phoneNumber, gender });
+  const editHandler = (id, username, gender, phoneNumber) => {
+    setInfo({ id, username, gender, phoneNumber });
   };
 
   return (

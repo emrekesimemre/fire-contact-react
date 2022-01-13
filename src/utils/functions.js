@@ -1,8 +1,16 @@
 import firebase from './firebase';
-import { child, getDatabase, onValue, push, query, ref, remove, set, update } from 'firebase/database';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  onValue,
+  query,
+  remove,
+  child,
+} from 'firebase/database';
 import { successNote } from './customTostify';
-
 export const addInfo = (info) => {
   const db = getDatabase();
   const userRef = ref(db, 'contact');
@@ -12,20 +20,19 @@ export const addInfo = (info) => {
     phoneNumber: info.phoneNumber,
     gender: info.gender,
   });
-  successNote("succesfully Added")
-};
 
+  successNote('veri eklendi');
+};
 export const useFetch = () => {
   const [contactList, setContactList] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
     const db = getDatabase();
     const userRef = ref(db, 'contact');
-
     onValue(query(userRef), (snapshot) => {
       const contacts = snapshot.val();
-
+      // console.log(snapshot.val())
       const contactArray = [];
       for (let id in contacts) {
         contactArray.push({ id, ...contacts[id] });
@@ -39,15 +46,14 @@ export const useFetch = () => {
 
 export const deleteInfo = (id) => {
   const db = getDatabase();
-  // const userRef = ref(db, 'contact');
-  remove(ref(db,"contact/" + id))
-  successNote("deleted")
+  remove(ref(db, 'contact/' + id));
+  successNote('veri silindi');
 };
 
-export const updateInfo=(info) =>{
+export const updateInfo = (info) => {
   const db = getDatabase();
-  const newUserKey = push(child(ref(db),"contact/")).key
+  const newUserKey = push(child(ref(db), 'contact/')).key;
   const updates = {};
-  updates["contct/" + newUserKey] = info;
-  return update(ref(db), updates)
-}
+  updates['contact/' + newUserKey] = info;
+  return updateInfo(ref(db), updates);
+};

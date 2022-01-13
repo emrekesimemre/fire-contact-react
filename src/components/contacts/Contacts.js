@@ -1,7 +1,7 @@
 import { Table, Icon } from 'semantic-ui-react';
 import { deleteInfo, useFetch } from '../../utils/functions';
-const Contacts = () => {
-  const { contactList, isLoading, editHandler } = useFetch();
+const Contacts = ({ editHandler }) => {
+  const { contactList, isLoading } = useFetch();
   return (
     <div>
       <h2 className="contact-header">Contacts</h2>

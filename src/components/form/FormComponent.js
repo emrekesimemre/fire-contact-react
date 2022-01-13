@@ -3,16 +3,20 @@ import { Grid, Form, Segment, Button } from 'semantic-ui-react';
 import { options } from '../../utils/constants';
 
 const FormComponent = ({ info, setInfo, handleFormSubmit }) => {
+
   const handleInputChange = (e) => {
-    // const name = e.target.name
-    // const value = e.target.value
+    // const {name} = e.target.name
+    // const {value} = e.target.value
     const { name, value } = e.target;
+    // console.log(e.target);
     setInfo({ ...info, [name]: value });
   };
 
-  const handleOptionChange = (e, values) => {
+  const handleOptionsChange = (e, values) => {
     const { name, value } = values;
-    setInfo({ ...info, [name]: value.toUpperCase() });
+    // console.log(values);
+    setInfo({...info, [name]: value.toUpperCase() });
+    // console.log(e,values);
   };
 
   return (
@@ -21,12 +25,12 @@ const FormComponent = ({ info, setInfo, handleFormSubmit }) => {
         <div className="ui piled segments">
           <div className="ui segment brand">
             <a
-              href="https://github.com/clarusway"
+              href="https://github.com/emrekesimemre"
               className="design"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <code>{'<Clarusway/> '}</code>
+              <code>{'<EKESIM/> '}</code>
             </a>
             <span className="design header">design</span>
           </div>
@@ -35,34 +39,34 @@ const FormComponent = ({ info, setInfo, handleFormSubmit }) => {
         <Form size="large" onSubmit={handleFormSubmit}>
           <Segment stacked>
             <Form.Input
+              onChange={handleInputChange}
               fluid
               name="username"
               icon="user"
               iconPosition="left"
               placeholder="Name"
-              value={info.username}
-              onChange={handleInputChange}
               required
+              value={info.username}
             />
             <Form.Input
+              onChange={handleInputChange}
               fluid
               name="phoneNumber"
               icon="phone"
               iconPosition="left"
               placeholder="Phone Number"
-              value={info.phoneNumber}
-              onChange={handleInputChange}
               required
+              value={info.phoneNumber}
             />
             <Form.Dropdown
+              onChange={handleOptionsChange}
               options={options}
-              onChange={handleOptionChange}
               placeholder="Gender"
               name="gender"
               fluid
               selection
-              value={info.gender.toUpperCase()}
               required
+              value={info.gender.toUpperCase()}
             />
             <Button color="teal" fluid size="large">
               Add
